@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface I_Interactable
 {
-    public Vector3 position { get; set; }
+    public void Interact();
 }

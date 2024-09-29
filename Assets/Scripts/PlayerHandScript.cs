@@ -12,11 +12,12 @@ public class PlayerHandScript : MonoBehaviour
     public GameObject CursorPrefab;
     public Transform handTransform;
     public int maxCards = 5;
-    public List<GameObject> cards = new List<GameObject>();
 
+    public List<GameObject> cards = new List<GameObject>();
+    public List<GameObject> interactables = new List<GameObject>();
 
     private Transform _currentActiveObject;
-    private Transform _cursorObj;
+    private Transform _cursorObj;   
     private int _cursorIndex;
     
 
@@ -24,6 +25,11 @@ public class PlayerHandScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cards.Clear();
+        interactables.Clear();
+        
+        if(OperatorScript.Instance!=null)cards.Add(OperatorScript.Instance.gameObject);
+
         for (int i = 0; i < maxCards; i++)
         {
             GameObject card =  Instantiate(CardPrefab, handTransform.position,Quaternion.identity, handTransform);
@@ -38,7 +44,7 @@ public class PlayerHandScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _cursorObj.position = _currentActiveObject.position+Vector3.up+new Vector3(0,Mathf.Sin(Time.time*5)*.1f,0);
+        _cursorObj.position = _currentActiveObject.position+new Vector3(.2f,.8f,0)+new Vector3(0,Mathf.Sin(Time.time*5)*.1f,0);
         if (Input.GetKeyDown(KeyCode.D))
         {
             _currentActiveObject = cards[(int)Mathf.Repeat(++_cursorIndex,cards.Count)].transform;
