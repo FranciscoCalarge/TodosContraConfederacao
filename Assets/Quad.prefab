@@ -596,6 +596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586f3f55e9956414b8b566f172ad2278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardScriptableObject: {fileID: 11400000, guid: 1fe8d2b804e455149b840bb1fe21c2a2,
+    type: 2}
+  isEnfileirada: 0
 --- !u!1001 &6701990130844549433
 PrefabInstance:
   m_ObjectHideFlags: 0

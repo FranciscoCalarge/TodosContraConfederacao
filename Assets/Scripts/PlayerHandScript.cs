@@ -26,7 +26,6 @@ public class PlayerHandScript : MonoBehaviour
     void Start()
     {
         cards.Clear();
-        interactables.Clear();
         
         if(OperatorScript.Instance!=null)cards.Add(OperatorScript.Instance.gameObject);
 
@@ -52,6 +51,11 @@ public class PlayerHandScript : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A))
         {
             _currentActiveObject=cards[(int)Mathf.Repeat(--_cursorIndex, cards.Count)].transform;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            GameObject obj = _currentActiveObject.gameObject;
+            obj.GetComponent<I_Interactable>().Interact();
         }
     }
 }

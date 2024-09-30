@@ -35,8 +35,4 @@ public class CardScript : MonoBehaviour, I_Interactable
         }
     }
 
-    public CardScriptO Enfileirar()
-    {
-        return cardScriptableObject;
-    }
 }

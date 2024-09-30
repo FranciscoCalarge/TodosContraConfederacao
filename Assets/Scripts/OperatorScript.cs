@@ -5,6 +5,7 @@ using UnityEngine;
 public class OperatorScript : MonoBehaviour , I_Interactable
 {
     public List<CardScript> cartasAcionadas;
+    public GameObject notificationPrefab;
     public static OperatorScript Instance;
 
     public int valorAtaque=0;
@@ -37,37 +38,52 @@ public class OperatorScript : MonoBehaviour , I_Interactable
 
     public void Interact()
     {
-        
+        Debug.Log("acionar");
+        StartCoroutine("PlayCards");
     }
 
     public void QueueCard(CardScript cartaSelecionada)
     {
         if(cartaSelecionada != null&&!cartaSelecionada.isEnfileirada)
         {
-            CardScriptO carta=cartaSelecionada.Enfileirar();
+            CardScript carta=cartaSelecionada;
             if (carta != null) { 
-                valorAtaque+=carta.valorAtaque;
-                valorDefesa+=carta.valorDefesa;
-                if (carta.isEspecial)
+                valorAtaque+=carta.cardScriptableObject.valorAtaque;
+                valorDefesa+=carta.cardScriptableObject.valorDefesa;
+                if (carta.cardScriptableObject.isEspecial)
                 {
-                    isEspecial = carta.isEspecial;
+                    isEspecial = carta.cardScriptableObject.isEspecial;
                 }
             }
             cartaSelecionada.isEnfileirada = true;
+            cartasAcionadas.Add(carta);
         }
         else
         {
-            CardScriptO carta=cartaSelecionada.Enfileirar();
+            CardScript carta=cartaSelecionada;
             if (carta != null)
             {
-                valorAtaque -= carta.valorAtaque;
-                valorDefesa -= carta.valorDefesa;
-                if (carta.isEspecial)
+                valorAtaque -= carta.cardScriptableObject.valorAtaque;
+                valorDefesa -= carta.cardScriptableObject.valorDefesa;
+                if (carta.cardScriptableObject.isEspecial)
                 {
                     isEspecial = false;
                 }
             }
+            cartasAcionadas.Remove(carta);
             cartaSelecionada.isEnfileirada=false;
         }
+    }
+
+    public IEnumerator PlayCards()
+    {
+        for(int i =0; i<cartasAcionadas.Count;i++){
+            GameObject aux = Instantiate(notificationPrefab,this.transform);
+            aux.GetComponent<NotificationScript>().text.text = cartasAcionadas[i].GetComponent<CardScript>().cardScriptableObject.isAtaque.ToString()+ "é um ataque";
+            yield return new WaitForSeconds(2);
+
+
+        }
+        yield return null;
     }
 }
