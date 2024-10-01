@@ -5,6 +5,8 @@ using UnityEngine;
 public class OperatorScript : MonoBehaviour , I_Interactable
 {
     public List<CardScript> cartasAcionadas;
+    public FighterScript fighterScript;
+
     public GameObject notificationPrefab;
     public static OperatorScript Instance;
 
@@ -80,8 +82,9 @@ public class OperatorScript : MonoBehaviour , I_Interactable
         for(int i =0; i<cartasAcionadas.Count;i++){
             GameObject aux = Instantiate(notificationPrefab,this.transform);
             aux.GetComponent<NotificationScript>().text.text = cartasAcionadas[i].GetComponent<CardScript>().cardScriptableObject.isAtaque.ToString()+ "é um ataque";
+            fighterScript.TakeDamage(15);
+            fighterScript.Attack();
             yield return new WaitForSeconds(2);
-
 
         }
         yield return null;

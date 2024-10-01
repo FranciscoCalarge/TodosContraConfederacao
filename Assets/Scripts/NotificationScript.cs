@@ -17,7 +17,7 @@ public class NotificationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.up * Time.deltaTime/Mathf.Sqrt(age);
+        transform.position += Vector3.up * Mathf.Min( Time.deltaTime/Mathf.Sqrt(age),2f);
         age += Time.deltaTime;
         if(age > maxAge)
         {

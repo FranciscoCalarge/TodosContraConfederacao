@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class PlayerHandScript : MonoBehaviour
 {
-    public GameObject CardPrefab;
+    public List<GameObject> CardPrefabs;
     public GameObject CursorPrefab;
     public Transform handTransform;
     public int maxCards = 5;
@@ -31,7 +31,7 @@ public class PlayerHandScript : MonoBehaviour
 
         for (int i = 0; i < maxCards; i++)
         {
-            GameObject card =  Instantiate(CardPrefab, handTransform.position,Quaternion.identity, handTransform);
+            GameObject card = Instantiate(CardPrefabs[Mathf.FloorToInt(Random.value*3)], handTransform.position,Quaternion.identity, handTransform);
             card.transform.position = new Vector3(Mathf.InverseLerp(0, maxCards, i) * maxCards - maxCards / 2, 0, 0)+transform.position;
             cards.Add(card);
             

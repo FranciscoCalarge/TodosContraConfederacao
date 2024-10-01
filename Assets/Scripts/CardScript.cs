@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CardScript : MonoBehaviour, I_Interactable
 {
     public CardScriptO cardScriptableObject;
     public bool isEnfileirada=false;
+    public TextMeshProUGUI cardCostMesh;
+    public TextMeshProUGUI cardValueMesh;
+    public GameObject iconsObj;
+
 
     private Vector3 originPos;
 
@@ -13,9 +18,33 @@ public class CardScript : MonoBehaviour, I_Interactable
     void Start()
     {
         originPos = transform.position;
+        InitiateCardVisual();   
     }
 
-    // Update is called once per frame
+    void InitiateCardVisual()
+    {
+        if (cardScriptableObject.isAtaque)
+        {
+            iconsObj.transform.GetChild(0).gameObject.SetActive(true);
+            cardCostMesh.text = cardScriptableObject.custoCarta.ToString();
+            cardValueMesh.text = cardScriptableObject.valorAtaque.ToString();
+        }
+        else if (cardScriptableObject.isEspecial)
+        {
+            iconsObj.transform.GetChild(2).gameObject.SetActive(true);
+            cardCostMesh.text = cardScriptableObject.custoCarta.ToString();
+            cardValueMesh.text = "";
+
+        }
+        else
+        {
+            iconsObj.transform.GetChild(1).gameObject.SetActive(true);
+            cardCostMesh.text = cardScriptableObject.custoCarta.ToString();
+            cardValueMesh.text = cardScriptableObject.valorDefesa.ToString();
+        }
+    }
+
+        // Update is called once per frame
     void Update()
     {
         if (isEnfileirada)
