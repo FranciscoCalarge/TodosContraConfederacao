@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class FighterScript : MonoBehaviour
@@ -9,12 +6,13 @@ public class FighterScript : MonoBehaviour
     public VisualEffect effect;
     public Transform originTransform;
     public Transform enemyTransform;
-    public Slider hpCanvasSlider;
-    private float hp = 60;
+    public Material healthBarMaterial;
+    private float _initialHP = 60;
+    private float _currentHP ;
 
     private void Start()
     {
-        hpCanvasSlider.value += 1;
+        healthBarMaterial.SetFloat("_hp_percentage",1f);
         Attack();
 
     }
@@ -28,8 +26,9 @@ public class FighterScript : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        hp-=damage;
-        hpCanvasSlider.value=hp/60;
+        _initialHP-=damage;
+        healthBarMaterial.SetFloat("_hp_percentage", _currentHP/_initialHP);
+
 
     }
 
