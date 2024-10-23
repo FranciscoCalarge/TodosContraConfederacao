@@ -57,6 +57,19 @@ public class CardScript : MonoBehaviour, I_Interactable
         }
     }
 
+    private void OnMouseEnter()
+    {
+        Activate();
+    }
+
+    public void Activate()
+    {
+        if (PlayerHandScript.Instance != null)
+        {
+            PlayerHandScript.Instance.DetermineActiveObject(this.transform);
+        }
+    }
+
     public void Interact()
     {
         if (OperatorScript.Instance != null) { 
