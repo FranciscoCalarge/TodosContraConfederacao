@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
 
 public class CardScript : MonoBehaviour, I_Interactable
 {
@@ -78,3 +81,4 @@ public class CardScript : MonoBehaviour, I_Interactable
     }
 
 }
+
