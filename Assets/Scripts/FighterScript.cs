@@ -21,7 +21,7 @@ public class FighterScript : MonoBehaviour
     {
         effect.SetVector3("obj", originTransform.position);
         effect.SetVector3("target", enemyTransform.position);
-        effect.Play();
+        effect.SendEvent("CustomPlay");
     }
 
     public void TakeDamage(float damage)
