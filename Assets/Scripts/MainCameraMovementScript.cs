@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+
 public class MainCameraMovementScript : MonoBehaviour
 {
     private Vector3 _initialPosition;
@@ -29,10 +30,10 @@ public class MainCameraMovementScript : MonoBehaviour
     void Update()
     {
         _movingCooldown += Time.deltaTime/3f;
-        transform.position = Vector3.Lerp(transform.position,_movementReferenceTarget+new Vector3(Mathf.Sin(Time.time/2f)*2f,0f,0f),_movingCooldown*cameraMoveSpeed/2);
+        transform.position = Vector3.Lerp(transform.position,_movementReferenceTarget+ Mathf.Sin(Time.time / 2f) * transform.right*2.5f,_movingCooldown*cameraMoveSpeed/2);
         if (_movingCooldown > 1f)
         {
-            _movementReferenceTarget = _initialPosition + new Vector3((Random.value - .5f) * _referenceCube.x, (Random.value - .5f) * _referenceCube.y, (Random.value - .5f) * _referenceCube.z);
+            _movementReferenceTarget = _initialPosition + new Vector3((Random.value - .5f) * _referenceCube.x , (Random.value - .5f) * _referenceCube.y, (Random.value - .5f) * _referenceCube.z);
             _movingCooldown = 0f;
         }
     }

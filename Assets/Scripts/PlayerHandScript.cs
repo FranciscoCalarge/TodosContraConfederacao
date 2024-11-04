@@ -58,7 +58,6 @@ public class PlayerHandScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _cursorObj.position = _currentActiveObject.position+new Vector3(.2f,.8f,0)+new Vector3(0,Mathf.Sin(Time.time*5)*.1f,0);
 
         DetermineActiveObject();
 
@@ -77,7 +76,7 @@ public class PlayerHandScript : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A))
         {
             _currentActiveObject = cards[(int)Mathf.Repeat(--_cursorIndex, cards.Count)].transform;
-        }
+        }   
     }
     public void DetermineActiveObject(Transform newActiveObject)
     {

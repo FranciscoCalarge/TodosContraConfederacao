@@ -14,6 +14,9 @@ public class OperatorScript : MonoBehaviour , I_Interactable
     public int valorDefesa=0;
     public bool isEspecial=false;
 
+    public bool _hasInteracted;
+    public bool HasInteracted { get => _hasInteracted; set => _hasInteracted=value; }
+
     void Awake()
     {
         if (Instance == null)

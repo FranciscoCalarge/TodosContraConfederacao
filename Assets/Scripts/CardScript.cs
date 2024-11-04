@@ -16,12 +16,17 @@ public class CardScript : MonoBehaviour, I_Interactable
 
 
     private Vector3 originPos;
+    public bool _hasInteracted;
+    public float interactedCd;
+    public bool HasInteracted { get => _hasInteracted; set => _hasInteracted=value; }
 
     // Start is called before the first frame update
     void Start()
     {
         originPos = transform.position;
-        InitiateCardVisual();   
+        InitiateCardVisual();
+        _hasInteracted = false;
+        interactedCd = 0;
     }
 
     void InitiateCardVisual()
@@ -50,6 +55,17 @@ public class CardScript : MonoBehaviour, I_Interactable
         // Update is called once per frame
     void Update()
     {
+        float auxScale = Mathf.Clamp(interactedCd, 1, 1.25f);
+        transform.localScale = Vector3.one * auxScale;
+
+        if (_hasInteracted)
+        {
+            interactedCd += Time.deltaTime*10;
+        }
+        else
+        {
+            interactedCd= 0;
+        }
         if (isEnfileirada)
         {
             transform.position = originPos + Vector3.up * .2f;
@@ -65,12 +81,18 @@ public class CardScript : MonoBehaviour, I_Interactable
         Activate();
     }
 
+    public void OnMouseExit()
+    {
+        _hasInteracted = false;
+    }
+
     public void Activate()
     {
         if (PlayerHandScript.Instance != null)
         {
             PlayerHandScript.Instance.DetermineActiveObject(this.transform);
         }
+        _hasInteracted = true;
     }
 
     public void Interact()
